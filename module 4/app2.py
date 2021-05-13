@@ -1,7 +1,11 @@
 multi_dimensional_list = [[1, [2, [3]]], [4, [5, [6]]], [7, [8, [9]]]]
-multi_dimensional_list = [[1, [2, [3, 15]]], [4, [5, [6, 16]]], [7, [8, [9]]],[[[0]]]]
+
+
 # result = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-def flatten_list(data:list):
+# no recursion
+
+
+def flatten_list(data: list):
     fin_list = []
     for i in data:
         if type(i) == int:
@@ -24,5 +28,34 @@ def flatten_list(data:list):
                         continue
                     print(n)
     return fin_list
+
+
+result = flatten_list(multi_dimensional_list)
+print(result)
+
+
+
+
+
+
+
+multi_dimensional_list = [[1, [2, [3]]], [4, [5, [6]]], [7, [8, [9]]]]
+
+
+# result = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# no recursion
+
+
+def flatten_list(data: list):
+    fin_list = []
+    for i in data:
+        if type(i) == int:
+            fin_list.append(i)
+            continue
+        print(i)
+        flatten_list(i).extend(flatten_list(i))
+    return fin_list
+
+
 result = flatten_list(multi_dimensional_list)
 print(result)
