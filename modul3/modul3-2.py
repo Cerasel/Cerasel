@@ -77,5 +77,3 @@ my_gen=(i for i in range (1,100,3))
 
         my_list.pop(0)
 
-
-
