@@ -20,6 +20,8 @@ hh2 = int(time2[3:5])
 mm2 = int(time2[6:8])
 ss2 = int(time2[9:])
 
+# 1 day = 86400 seconds / 1 hour = 3600 seconds / 1 minute= 60 seconds
+
 t1 = 86400 * dd1 + 3600 * hh1 +  60 * mm1 + ss1
 t2 = 84400 * dd2 + 3600 * hh2 +  60 * mm2 + ss2
 print ('time difference:', t2 - t1)
