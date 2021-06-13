@@ -20,7 +20,8 @@ Masinile cu serii pare sunt cu volan pe dreapta iar cele cu serii impare cu vola
   b) documentati clasele 5p
   c) documentati metodele 5p
 """
-class Car :
+class ShoIter :
+   #class Iter
    def _init_(self, series:list):
       self.series = series
    def _iter_ (self) :
@@ -33,6 +34,7 @@ class Car :
 
 
 class Factory:
+   #class for series
      def _init_(self, date):
         self.date = date
         self.right = {}
@@ -49,7 +51,7 @@ def __iter__(self):
    result = []
    for v in self.work.values():
       result.extend(v)
-   return Car(result)
+   return ShoIter(result)
 factory = Factory(date.fromisoformat('2021-05-11'))
 factory.addwork("arg1", [101 , 41])
 factory.addwork("arg2", [314 , 90])
