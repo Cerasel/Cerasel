@@ -7,7 +7,16 @@
 # example: "1234567a Text to te5t" will become ("1234567A", "_ext_to_te_t")
 
 def process_text(text: str):
-    pass
+    r1, r2 = text.split(' ', maxsplit=1)
+    r2 = r2
+    r1 = r1.upper()
+    r2r = ''
+    for letter in r2:
+        if letter.islower():
+            r2r += letter
+        else :
+           r2r =''
+    return(r1,r2)
     # <your code here>
 
 
