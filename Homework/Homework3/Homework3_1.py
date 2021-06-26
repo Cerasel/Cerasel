@@ -5,7 +5,14 @@
 # example [1, True, '123', False, 6, ()] will be transformed into [123, 6, 1, 1, 0, 0]
 
 def ordered_ints(list_of_objects: list):
-        for  i in ordered_ints(list_of_objects)
-        list_of_objects = sorted(list_of_objects, reverse = True)
+       result = []
+       for i in list_of_objects:
+               if type(i) == tuple:
+                    j= len(i)
+               else :
+                   j = int(i)
+               result.append(j)
+       return sorted(result, reverse=True)
 
-print(list_of_object([1, True, '123', False, 6, ()]))
+
+print(ordered_ints([1, True, '123', False, 6, ()]))
