@@ -12,4 +12,4 @@ def factorial_of_squares(n: int):
 print("my result:")
 print(factorial_of_squares(5))
 print("result should be:")
-print((1**2) * (2**2)*(3**2))
+print((1**2) * (2**2)*(3**2) * (4**2)*(5**2))
