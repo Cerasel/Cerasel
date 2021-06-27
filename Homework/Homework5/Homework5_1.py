@@ -37,8 +37,12 @@ using a different name since you are asked to use an argument called degrees
 from math import cos, acos
 from math import degrees as deg
 
+from math import cos, acos
+from math import degrees as deg
+
+
 class Triangle:
-    def _init_(self, A, B, C, AB, BC, CA):
+    def __init__(self, A: float = 1, B: float = 1, C: float = 1, AB: float = 60, BC: float = 60, CA: float = 60):
         self.A = A
         self.B = B
         self.C = C
@@ -46,35 +50,80 @@ class Triangle:
         self.BC = BC
         self.CA = CA
 
-    def modify_angle(self,angle : 'AB' 'BC' 'CA' , degrees: int):
-        if(self.AB + self.BC + self.CA) < 0 & (self.AB + self.BC + self.CA) > 180:
-            raise Exception('Angle outside  interval (0,180)')
+    def modify_angle(self, angle: str, degrees: float):
         if angle == 'AB':
-            init.AB = self.AB
-            self.AB = self.AB + degrees
-            if self.AB != init_AB:
-                self.AB = self.AB + degrees
-                if self.AB != init_AB:
-                    self.AB = self.AB + degrees
-                    if self.AB != init_AB:
-                        self.C = (self.A ** 2 + self.B ** 2 - 2 * self.A  * self.B * cos(self.AB)) ** 0.5
-                        self.BC = acos((self.B ** 2 +  self.C ** 2 - self.A ** 2) / 2 * self.B * self.C)
-                        self.CA = acos((self.C ** 2 +  self.A ** 2 - self.B ** 2) / 2 * self.C * self.A)
+            self.AB += degrees
+            self.C = (self.A ** 2 + self.B ** 2 - 2 * self.A * self.B * cos(self.AB)) ** (1 / 2)
+            self.BC = deg(acos((self.B ** 2 + self.C ** 2 - self.A ** 2) / (2 * self.B * self.C)))
+            self.CA = deg(acos((self.C ** 2 + self.A ** 2 - self.B ** 2) / (2 * self.C * self.A)))
 
         elif angle == 'BC':
-             init.BC = self.BC
-             self.BC = self.BC + degrees
-             if self.BC != init_BC:
-                 self.A = (self.B ** 2 + self.C ** 2 - 2 * self.B * self.C * cos(self.BC)) ** 0.5
-                 self.AB = acos((self.A ** 2 + self.B ** 2 - self.C ** 2) / 2 * self.A * self.B)
-                 self.CA = acos((self.C ** 2 + self.A ** 2 - self.B ** 2) / 2 * self.C * self.A)
-        elif angle == 'CA':
-             init.CA = self.CA
-             self.CA = self.CA + degrees
-             if self.CA != init_CA:
-                 self.B = (self.C ** 2 + self.A ** 2 - 2 * self.C * self.A * cos(self.CA)) ** 0.5
-                 self.AB = acos((self.A ** 2 + self.B ** 2 - self.C ** 2) / 2 * self.A * self.B)
-                 self.BC = acos((self.B ** 2 +  self.C ** 2 - self.A ** 2) / 2 * self.B * self.C)
+            self.BC += degrees
+            self.A = (self.B ** 2 + self.C ** 2 - 2 * self.B * self.C * cos(self.BC)) ** 0.5
+            self.AB = deg(acos((self.A ** 2 + self.B ** 2 - self.C ** 2) / (2 * self.A * self.B)))
+            self.CA = deg(acos((self.C ** 2 + self.A ** 2 - self.B ** 2) / (2 * self.C * self.A)))
 
+        elif angle == 'CA':
+            self.CA += degrees
+            self.B = (self.C ** 2 + self.A ** 2 - 2 * self.C * self.A * cos(self.CA)) ** 0.5
+            self.AB = deg(acos((self.A ** 2 + self.B ** 2 - self.C ** 2) / (2 * self.A * self.B)))
+            self.BC = deg(acos((self.B ** 2 + self.C ** 2 - self.A ** 2) / (2 * self.B * self.C)))
+
+        rules = [
+            0 < self.AB < 180,
+            0 < self.BC < 180,
+            0 < self.CA < 180
+        ]
+        if not all(rules):
+            raise ValueError('Total sum of all angles must be 180')
+
+    def modify_side(self, side: str, meters: float):
+        if side == 'A':
+            temp = self.A
+            self.A += meters
+
+            if self.A >= self.B + self.C:
+                raise ValueError("One side cannot be greated than the sum of other two sides")
+            elif self.A <= 0:
+                raise ValueError("Side of a triangle cannot be negative or 0")
+
+            self.B = ((self.A) / temp) * self.B
+            self.C = ((self.A) / temp) * self.C
+
+        elif side == 'B':
+            temp = self.B
+            self.B += meters
+
+            if self.B >= self.A + self.C:
+                raise ValueError("One side cannot be greated than the sum of other two sides")
+            elif self.B <= 0:
+                raise ValueError("Side of a triangle cannot be negative or 0")
+
+            self.A = ((self.B) / temp) * self.A
+            self.C = ((self.B) / temp) * self.C
+
+        elif side == 'C':
+            temp = self.C
+            self.C += meters
+
+            if self.C >= self.B + self.A:
+                raise ValueError("One side cannot be greated than the sum of other two sides")
+            elif self.C <= 0:
+                raise ValueError("Side of a triangle cannot be negative or 0")
+
+            self.B = ((self.C) / temp) * self.B
+            self.A = ((self.C) / temp) * self.A
+
+
+if __name__ == "__main__":
+    my_triangle = Triangle()
+    my_triangle.modify_angle('AB', 30)
+    my_triangle.modify_side('A', 1.5)
+    print("AB", my_triangle.AB)
+    print("BC", my_triangle.BC)
+    print("CA", my_triangle.CA)
+    print("A", my_triangle.A)
+    print("B", my_triangle.B)
+    print("C", my_triangle.C)
 
 
